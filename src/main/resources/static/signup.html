@@ -5,113 +5,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Virtual Banking System - Sign Up</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background-color: #f0f2f5;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
+            padding: 20px;
         }
 
         .container {
-            width: 90%;
-            max-width: 450px;
+            width: 100%;
+            max-width: 460px;
             background: white;
-            border-radius: 16px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
             overflow: hidden;
         }
 
         .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 30px;
+            background-color: #1a73e8;
+            padding: 28px 30px;
             text-align: center;
             color: white;
         }
 
         .header h1 {
-            font-size: 28px;
-            margin-bottom: 5px;
+            font-size: 30px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 4px;
         }
 
         .header p {
-            font-size: 14px;
-            opacity: 0.9;
+            font-size: 13px;
+            opacity: 0.85;
         }
 
-        .content {
-            padding: 40px 30px;
-        }
+        .content { padding: 32px 30px; }
 
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
+        .content h2 {
+            font-size: 20px;
             color: #333;
-            font-weight: 500;
-            font-size: 14px;
-        }
-
-        .form-group input,
-        .form-group select {
-            width: 100%;
-            padding: 12px 15px;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 14px;
-            transition: border-color 0.3s;
-        }
-
-        .form-group input:focus,
-        .form-group select:focus {
-            outline: none;
-            border-color: #667eea;
-        }
-
-        .btn {
-            width: 100%;
-            padding: 14px;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-weight: 600;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
-        }
-
-        .link {
+            margin-bottom: 24px;
             text-align: center;
-            margin-top: 20px;
-            color: #666;
-            font-size: 14px;
-        }
-
-        .link a {
-            color: #667eea;
-            text-decoration: none;
-            font-weight: 600;
-            cursor: pointer;
-        }
-
-        .link a:hover {
-            text-decoration: underline;
         }
 
         .message {
@@ -122,93 +62,142 @@
             display: none;
         }
 
-        .message.success {
-            background: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
+        .message.success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .message.error { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        .message.show { display: block; }
 
-        .message.error {
-            background: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
+        .form-group { margin-bottom: 16px; }
 
-        .message.show {
+        .form-group label {
             display: block;
+            margin-bottom: 7px;
+            color: #333;
+            font-weight: 500;
+            font-size: 14px;
         }
 
-        h2 {
-            color: #333;
-            margin-bottom: 25px;
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #fafafa;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #1a73e8;
+            box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.1);
+            background: white;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 13px;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            background-color: #1a73e8;
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s;
+            margin-top: 6px;
+        }
+
+        .btn:hover {
+            background-color: #1558b0;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(26, 115, 232, 0.35);
+        }
+
+        .link {
             text-align: center;
+            margin-top: 16px;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .link a {
+            color: #1a73e8;
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .link a:hover { text-decoration: underline; }
+
+        .footer {
+            text-align: center;
+            padding: 16px;
+            font-size: 12px;
+            color: #aaa;
+            border-top: 1px solid #f0f0f0;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>VBS</h1>
-            <p>Virtual Banking System</p>
-        </div>
-
-        <div class="content">
-            <h2>Sign Up</h2>
-            
-            <div id="signupMessage" class="message"></div>
-
-            <form id="signupForm">
-                <div class="form-group">
-                    <label>Full Name</label>
-                    <input type="text" id="signupName" required>
-                </div>
-
-                <div class="form-group">
-                    <label>Username</label>
-                    <input type="text" id="signupUsername" required>
-                </div>
-
-                <div class="form-group">
-                    <label>Email</label>
-                    <input type="email" id="signupEmail" required>
-                </div>
-
-                <div class="form-group">
-                    <label>Password</label>
-                    <input type="password" id="signupPassword" required>
-                </div>
-
-                <div class="form-group">
-                    <label>Role</label>
-                    <select id="signupRole" required>
-                        <option value="">Select Role</option>
-                        <option value="customer">Customer</option>
-                        <option value="admin">Admin</option>
-                    </select>
-                </div>
-
-                <button type="submit" class="btn">Create Account</button>
-            </form>
-
-            <div class="link">
-                Already have an account? <a onclick="window.location.href='login.html'">Login</a>
-            </div>
-            <div class="link">
-                <a onclick="window.location.href='home.html'">← Back to Home</a>
-            </div>
-        </div>
+<div class="container">
+    <div class="header">
+        <h1>VBS</h1>
+        <p>Virtual Banking System</p>
     </div>
 
-    <script>
+    <div class="content">
+        <h2>Sign Up</h2>
+
+        <div id="signupMessage" class="message"></div>
+
+        <form id="signupForm">
+            <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" id="signupName" placeholder="Enter your full name" required>
+            </div>
+            <div class="form-group">
+                <label>Username</label>
+                <input type="text" id="signupUsername" placeholder="Enter a username" required>
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" id="signupEmail" placeholder="Enter your email" required>
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="signupPassword" placeholder="Enter a password" required>
+            </div>
+            <div class="form-group">
+                <label>Role</label>
+                <select id="signupRole" required>
+                    <option value="">Select Role</option>
+                    <option value="customer">Customer</option>
+                    <option value="admin">Admin</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn">Create Account</button>
+        </form>
+
+        <div class="link">Already have an account? <a onclick="window.location.href='login.html'">Login</a></div>
+        <div class="link"><a onclick="window.location.href='home.html'">← Back to Home</a></div>
+    </div>
+
+    <div class="footer">© 2025 Virtual Banking System</div>
+</div>
+
+<script>
     const showMessage = (id, text, type) => {
         const msg = document.getElementById(id);
         msg.innerText = text;
         msg.className = "message " + type + " show";
     };
 
-    const signupForm = document.getElementById("signupForm");
-
-    signupForm.addEventListener("submit", (event) => {
+    document.getElementById("signupForm").addEventListener("submit", (event) => {
         event.preventDefault();
 
         const signupData = {
@@ -221,35 +210,23 @@
 
         fetch("http://localhost:8081/register", {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify(signupData)
         })
         .then(response => response.text())
         .then(result => {
             if (result === "Successfully Registered") {
-                showMessage(
-                    "signupMessage",
-                    "Account created successfully! Please login.",
-                    "success"
-                );
-
+                showMessage("signupMessage", "Account created successfully! Please login.", "success");
                 window.location.href = "login.html";
             } else {
                 showMessage("signupMessage", result, "error");
             }
         })
         .catch(error => {
-            showMessage(
-                "signupMessage",
-                "Error connecting to server. Please try again.",
-                "error"
-            );
+            showMessage("signupMessage", "Error connecting to server. Please try again.", "error");
             console.error("Signup error:", error);
         });
     });
 </script>
-
 </body>
 </html>
