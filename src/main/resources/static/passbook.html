@@ -1,271 +1,338 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Passbook - Virtual Banking System</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Passbook - Virtual Banking System</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  <style>
-    *{margin:0;padding:0;box-sizing:border-box}
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            min-height: 100vh;
+            padding: 20px;
+        }
 
-    body{
-        font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;
-        background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);
-        min-height:100vh;
-        padding:20px
-    }
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
 
-    .container{
-        max-width:1000px;
-        margin:auto;
-        background:#fff;
-        border-radius:16px;
-        box-shadow:0 20px 60px rgba(0,0,0,.3);
-        overflow:hidden
-    }
+        .header {
+            background-color: #1a73e8;
+            padding: 24px 30px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-    .header{
-        background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);
-        padding:30px;
-        color:#fff;
-        display:flex;
-        justify-content:space-between;
-        align-items:center
-    }
+        .header-left h1 {
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 3px;
+        }
 
-    .header-left h1{font-size:28px}
-    .header-left p{font-size:14px;opacity:.9}
+        .header-left p {
+            font-size: 13px;
+            opacity: 0.85;
+        }
 
-    .btn-header{
-        padding:10px 20px;
-        border:2px solid #fff;
-        background:rgba(255,255,255,.2);
-        color:#fff;
-        border-radius:8px;
-        cursor:pointer;
-        font-weight:600;
-        text-decoration:none;
-        transition:.3s
-    }
+        .header-right {
+            display: flex;
+            gap: 10px;
+        }
 
-    .btn-header:hover{background:#fff;color:#667eea}
+        .btn-header {
+            padding: 9px 20px;
+            background: transparent;
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.7);
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s;
+        }
 
-    .content{padding:40px 30px}
+        .btn-header:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+        }
 
-    .passbook-header{
-        display:flex;
-        justify-content:space-between;
-        align-items:center;
-        margin-bottom:30px
-    }
+        .content { padding: 30px; }
 
-    .balance-card{
-        background:linear-gradient(135deg,#667eea,#764ba2);
-        color:#fff;
-        padding:20px 30px;
-        border-radius:10px
-    }
+        .passbook-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
 
-    .balance-card .amount{font-size:28px;font-weight:700}
+        .passbook-header h2 {
+            font-size: 20px;
+            color: #333;
+        }
 
-    .transactions-section{
-        background:#f8f9fa;
-        padding:30px;
-        border-radius:12px
-    }
+        .balance-card {
+            background-color: #1a73e8;
+            color: white;
+            padding: 16px 24px;
+            border-radius: 10px;
+            text-align: right;
+        }
 
-    .transactions-list{display:flex;flex-direction:column;gap:10px}
+        .balance-card p {
+            font-size: 12px;
+            opacity: 0.85;
+            margin-bottom: 4px;
+        }
 
-    .transaction-item{
-        background:#fff;
-        padding:18px;
-        border-radius:10px;
-        display:flex;
-        justify-content:space-between;
-        align-items:center;
-        border-left:5px solid #667eea;
-        box-shadow:0 2px 8px rgba(0,0,0,.05)
-    }
+        .balance-card .amount {
+            font-size: 26px;
+            font-weight: 700;
+        }
 
-    .transaction-item.deposit{border-left-color:#43e97b}
-    .transaction-item.withdrawal{border-left-color:#f5576c}
-    .transaction-item.transfer{border-left-color:#4facfe}
+        .transactions-section {
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
 
-    .transaction-info{display:flex;gap:15px;align-items:center}
+        .transactions-list {
+            display: flex;
+            flex-direction: column;
+        }
 
-    .transaction-icon{
-        width:45px;height:45px;
-        border-radius:50%;
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        font-size:22px
-    }
+        .transaction-item {
+            background: white;
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 4px solid #1a73e8;
+            border-bottom: 1px solid #f0f0f0;
+            transition: background 0.15s ease;
+        }
 
-    .deposit .transaction-icon{background:#d4f8e8;color:#43e97b}
-    .withdrawal .transaction-icon{background:#fde0e5;color:#f5576c}
-    .transfer .transaction-icon{background:#d4e7ff;color:#4facfe}
+        .transaction-item:last-child { border-bottom: none; }
+        .transaction-item:hover { background: #f8faff; }
 
-    .transaction-details .type{font-weight:600;color:#333}
-    .transaction-details .date{font-size:12px;color:#999}
+        .transaction-item.deposit { border-left-color: #00897b; }
+        .transaction-item.withdrawal { border-left-color: #e53935; }
+        .transaction-item.transfer { border-left-color: #f57c00; }
 
-    .transaction-right{text-align:right}
+        .transaction-info { display: flex; gap: 14px; align-items: center; }
 
-    .transaction-amount{font-size:16px;font-weight:700}
-    .deposit .transaction-amount{color:#43e97b}
-    .withdrawal .transaction-amount{color:#f5576c}
-    .transfer .transaction-amount{color:#4facfe}
+        .transaction-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
 
-    .balance-display{font-size:12px;color:#999}
+        .deposit .transaction-icon { background: #e0f4f1; }
+        .withdrawal .transaction-icon { background: #fdecea; }
+        .transfer .transaction-icon { background: #fff3e0; }
 
-    .pagination{
-        margin-top:20px;
-        display:flex;
-        justify-content:center;
-        gap:10px
-    }
+        .transaction-details .type {
+            font-weight: 600;
+            color: #333;
+            font-size: 14px;
+            margin-bottom: 3px;
+        }
 
-    .pagination button{
-        padding:8px 12px;
-        border:1px solid #ddd;
-        border-radius:6px;
-        cursor:pointer
-    }
+        .transaction-details .date { font-size: 12px; color: #999; }
 
-    .pagination .active{
-        background:#667eea;
-        color:#fff;
-        border-color:#667eea
-    }
-    .header > div {
-        display: flex;
-        gap: 10px;
-    }
+        .transaction-right { text-align: right; }
 
-    .btn-header{
-        min-width: 130px;
-        height: 42px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-    }
+        .transaction-amount { font-size: 15px; font-weight: 700; margin-bottom: 3px; }
+        .deposit .transaction-amount { color: #00897b; }
+        .withdrawal .transaction-amount { color: #e53935; }
+        .transfer .transaction-amount { color: #f57c00; }
 
+        .balance-display { font-size: 12px; color: #999; }
 
-    .message{display:none;margin-bottom:20px}
-    .message.show{display:block}
-  </style>
+        .empty-state {
+            text-align: center;
+            padding: 50px 20px;
+            color: #999;
+            font-size: 15px;
+        }
+
+        .empty-state::before {
+            content: '📒';
+            display: block;
+            font-size: 40px;
+            margin-bottom: 12px;
+        }
+
+        .pagination {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .pagination button {
+            padding: 8px 13px;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            background: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: all 0.2s;
+        }
+
+        .pagination button:hover { border-color: #1a73e8; color: #1a73e8; }
+        .pagination button.active { background: #1a73e8; color: white; border-color: #1a73e8; }
+
+        .footer {
+            text-align: center;
+            padding: 16px;
+            font-size: 12px;
+            color: #aaa;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        @media (max-width: 600px) {
+            .header { flex-direction: column; gap: 12px; text-align: center; }
+            .passbook-header { flex-direction: column; gap: 16px; align-items: flex-start; }
+            .balance-card { text-align: left; width: 100%; }
+        }
+    </style>
 </head>
-
 <body>
 <div class="container">
-
-  <div class="header">
-    <div class="header-left">
-      <h1>VBS</h1>
-    </div>
-    <div>
-      <a id="dashLink" class="btn-header">← Dashboard</a>
-      <button class="btn-header" onclick="logout()">Logout</button>
-    </div>
-  </div>
-
-  <div class="content">
-
-    <div class="passbook-header">
-      <h2>Your Passbook</h2>
-      <div class="balance-card">
-        <p>Current Balance</p>
-        <div class="amount">₹<span id="currentBalance">0.00</span></div>
-      </div>
+    <div class="header">
+        <div class="header-left">
+            <h1>VBS</h1>
+            <p>Virtual Banking System</p>
+        </div>
+        <div class="header-right">
+            <a id="dashLink" class="btn-header">← Dashboard</a>
+            <button class="btn-header" onclick="logout()">Logout</button>
+        </div>
     </div>
 
-    <div class="transactions-section">
-      <div id="transactionsList" class="transactions-list"></div>
-      <div id="paginationControls" class="pagination"></div>
+    <div class="content">
+        <div class="passbook-header">
+            <h2>Your Passbook</h2>
+            <div class="balance-card">
+                <p>Current Balance</p>
+                <div class="amount">₹<span id="currentBalance">0.00</span></div>
+            </div>
+        </div>
+
+        <div class="transactions-section">
+            <div id="transactionsList" class="transactions-list">
+                <div class="empty-state">Loading transactions...</div>
+            </div>
+            <div id="paginationControls" class="pagination"></div>
+        </div>
     </div>
 
-  </div>
+    <div class="footer">© 2025 Virtual Banking System</div>
 </div>
 
 <script>
-  const API_URL = 'http://localhost:8081';
-  let userId, role;
-  let transactions = [];
-  let currentPage = 1;
-  const itemsPerPage = 10;
+    const API_URL = 'http://localhost:8081';
+    let userId, role;
+    let transactions = [];
+    let currentPage = 1;
+    const itemsPerPage = 10;
 
-  function getUserIdFromURL(){
-      const p = new URLSearchParams(window.location.search);
-      userId = p.get('id');
-      role = p.get('role') || 'customer';
-      if(!userId) location.href='login.html';
-      document.getElementById('dashLink').href =
-          `dashboard.html?id=${userId}&role=${encodeURIComponent(role)}`;
-  }
+    function getUserIdFromURL() {
+        const p = new URLSearchParams(window.location.search);
+        userId = p.get('id');
+        role = p.get('role') || 'customer';
+        if (!userId) location.href = 'login.html';
+        document.getElementById('dashLink').href =
+            `dashboard.html?id=${userId}&role=${encodeURIComponent(role)}`;
+    }
 
-  async function loadPassbook(){
-      const r = await fetch(`${API_URL}/passbook/${userId}`);
-      transactions = await r.json();
-      if(transactions.length)
-          document.getElementById('currentBalance').textContent =
-              transactions[transactions.length-1].currBalance.toFixed(2);
-      render();
-  }
+    async function loadPassbook() {
+        const r = await fetch(`${API_URL}/passbook/${userId}`);
+        transactions = await r.json();
+        if (transactions.length)
+            document.getElementById('currentBalance').textContent =
+                transactions[transactions.length - 1].currBalance.toFixed(2);
+        render();
+    }
 
-  function getType(d){
-      d=d.toLowerCase();
-      if(d.includes('deposit')) return 'deposit';
-      if(d.includes('withdrawal')) return 'withdrawal';
-      return 'transfer';
-  }
+    function getType(d) {
+        d = d.toLowerCase();
+        if (d.includes('deposit')) return 'deposit';
+        if (d.includes('withdrawal')) return 'withdrawal';
+        return 'transfer';
+    }
 
-  function render(){
-      const list = document.getElementById('transactionsList');
-      const pag = document.getElementById('paginationControls');
+    function render() {
+        const list = document.getElementById('transactionsList');
+        const pag = document.getElementById('paginationControls');
 
-      const sorted=[...transactions].sort((a,b)=>new Date(b.date)-new Date(a.date));
-      const totalPages=Math.ceil(sorted.length/itemsPerPage);
-      const slice=sorted.slice((currentPage-1)*itemsPerPage,currentPage*itemsPerPage);
+        const sorted = [...transactions].sort((a, b) => new Date(b.date) - new Date(a.date));
+        const totalPages = Math.ceil(sorted.length / itemsPerPage);
+        const slice = sorted.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
-      list.innerHTML=slice.map(t=>{
-          const type = getType(t.description);
+        if (slice.length === 0) {
+            list.innerHTML = `<div class="empty-state">No transactions found.</div>`;
+            return;
+        }
 
-          let sign = '-';
-          if(type === 'deposit') sign = '+';
-          else if(type === 'transfer' && t.description.toLowerCase().includes('received'))
-              sign = '+';
+        list.innerHTML = slice.map(t => {
+            const type = getType(t.description);
+            let sign = '-';
+            if (type === 'deposit') sign = '+';
+            else if (type === 'transfer' && t.description.toLowerCase().includes('received')) sign = '+';
+            const icon = type === 'deposit' ? '📥' : type === 'withdrawal' ? '💸' : '🔁';
 
-          const icon = type==='deposit'?'📥':type==='withdrawal'?'💸':'🔁';
+            return `
+            <div class="transaction-item ${type}">
+                <div class="transaction-info">
+                    <div class="transaction-icon">${icon}</div>
+                    <div class="transaction-details">
+                        <div class="type">${t.description}</div>
+                        <div class="date">${new Date(t.date).toLocaleString('en-IN')}</div>
+                    </div>
+                </div>
+                <div class="transaction-right">
+                    <div class="transaction-amount">${sign}₹${t.amount.toFixed(2)}</div>
+                    <div class="balance-display">Balance ₹${t.currBalance.toFixed(2)}</div>
+                </div>
+            </div>`;
+        }).join('');
 
-          return `
-          <div class="transaction-item ${type}">
-              <div class="transaction-info">
-                  <div class="transaction-icon">${icon}</div>
-                  <div class="transaction-details">
-                      <div class="type">${t.description}</div>
-                      <div class="date">${new Date(t.date).toLocaleString('en-IN')}</div>
-                  </div>
-              </div>
-              <div class="transaction-right">
-                  <div class="transaction-amount">${sign}₹${t.amount.toFixed(2)}</div>
-                  <div class="balance-display">Balance ₹${t.currBalance.toFixed(2)}</div>
-              </div>
-          </div>`;
-      }).join('');
+        pag.innerHTML = '';
+        for (let i = 1; i <= totalPages; i++) {
+            pag.innerHTML += `<button class="${i === currentPage ? 'active' : ''}" onclick="go(${i})">${i}</button>`;
+        }
+    }
 
-      pag.innerHTML='';
-      for(let i=1;i<=totalPages;i++){
-          pag.innerHTML+=`<button class="${i===currentPage?'active':''}" onclick="go(${i})">${i}</button>`;
-      }
-  }
+    function go(p) { currentPage = p; render(); }
+    function logout() { location.href = 'home.html'; }
 
-  function go(p){currentPage=p;render()}
-  function logout(){location.href='home.html'}
-
-  window.onload=()=>{
-      getUserIdFromURL();
-      loadPassbook();
-  }
+    window.onload = () => {
+        getUserIdFromURL();
+        loadPassbook();
+    }
 </script>
 </body>
 </html>
